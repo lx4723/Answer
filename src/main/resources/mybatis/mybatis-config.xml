@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!--配置全局属性-->
+    <settings>
+       <!--  使用jdbc 的 getGeneratedKeys  获取自增主键-->
+        <setting name="useGeneratedKeys" value="true"/>
+
+        <!--开启驼峰命名转换  user_name >>> userName-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
+    <!-- 实体类,简称 -设置别名 -->
+    <typeAliases>
+        <typeAlias alias="Question" type="com.answer.entity.QuestionEntity"/>
+    </typeAliases>
+    <!-- 实体接口映射资源 -->
+    <!--
+        说明：如果xxMapper.xml配置文件放在和xxMapper.java统一目录下，mappers也可以省略，
+        因为org.mybatis.spring.mapper.MapperFactoryBean默认会去查找与xxMapper.java相同目录和名称的xxMapper.xml
+    -->
+    <mappers>
+        <mapper resource="mapper/QuestionMapper.xml"/>
+    </mappers>
+
+</configuration>

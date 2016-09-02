@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--扫描aop 包下所有使用注解的类型-->
+    <context:component-scan base-package="com.answer.aop"/>
+
+    <!--开启AOP监听-->
+
+    <aop:aspectj-autoproxy />
+
+    <!-- 开启AOP切面日志 -->
+    <bean id="loggingAspect" class="com.answer.aop.LoggingAspect"></bean>
+
+
+    <aop:config>
+        <!--切入点配置 -->
+        <aop:pointcut expression="execution(* com.answer.controller.*.*(..))" id="answer-controller"/>
+        <aop:pointcut expression="execution(* com.answer.service.*.*(..))" id="answer-service"/>
+        <aop:pointcut expression="execution(* com.answer.mapper.*.*(..))" id="answer-mapper"/>
+
+        <!-- 日志切面 -->
+        <aop:aspect ref="loggingAspect">
+            <aop:before method="before" pointcut-ref="answer-controller"/>
+            <aop:after method="before" pointcut-ref="answer-controller"/>
+            <aop:after-returning method="returned" pointcut-ref="answer-controller" returning="result"/>
+            <aop:after-throwing method="throwed" pointcut-ref="answer-controller" throwing="ex"/>
+
+            <aop:before method="before" pointcut-ref="answer-service"/>
+            <aop:after method="before" pointcut-ref="answer-service"/>
+            <aop:after-returning method="returned" pointcut-ref="answer-service" returning="result"/>
+            <aop:after-throwing method="throwed" pointcut-ref="answer-service" throwing="ex"/>
+
+            <aop:before method="before" pointcut-ref="answer-mapper"/>
+            <aop:after method="before" pointcut-ref="answer-mapper"/>
+            <aop:after-returning method="returned" pointcut-ref="answer-mapper" returning="result"/>
+            <aop:after-throwing method="throwed" pointcut-ref="answer-mapper" throwing="ex"/>
+
+        </aop:aspect>
+    </aop:config>
+
+</beans>
