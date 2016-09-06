@@ -141,6 +141,12 @@
             <artifactId>spring-context</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
+        <!--7、redis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.6.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

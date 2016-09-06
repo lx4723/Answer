@@ -13,8 +13,8 @@ import static org.junit.Assert.*;
  * Created by Administrator on 2016/9/2.
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)  //spring和junit整合，junit启动时加载springIoc容器
-@ContextConfiguration({"classpath:spring/spring-*.xml"})  //告诉JUnitspring 的配置文件
+@RunWith(SpringJUnit4ClassRunner.class)                     //spring和junit整合，junit启动时加载springIoc容器
+@ContextConfiguration({"classpath:spring/spring-*.xml"})    //告诉JUnit      spring 的配置文件
 public class QuestionServiceImplTest {
 
     @Autowired

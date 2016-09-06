@@ -9,7 +9,8 @@
    <!--mybatis和 spring 整合-->
    <!--1、 配置数据库相关参数-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
-    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource ">-->
+
+
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <!-- 配置连接池属性-->
 
@@ -39,7 +40,7 @@
         <property name="acquireRetryAttempts" value="10"/>
         <!-- 获取下一次连接时最短间隔600毫秒，有助于提高性能 -->
         <property name="acquireRetryDelay" value="600"/>
-        <!-- 检查连接的有效性，此处小弟不是很懂什么意思 -->
+        <!-- 检查连接的有效性 -->
         <property name="testConnectionOnCheckin" value="true"/>
         <!-- 每个1200秒检查连接对象状态 -->
         <property name="idleConnectionTestPeriod" value="1200"/>
@@ -47,27 +48,21 @@
         <property name="checkoutTimeout" value="10000"/>
 
     </bean>
-    <!--2、  配置sqlSessionFactory -->
-    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
-        <!--&lt;!&ndash;注入数据库连接池&ndash;&gt;-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-        <!--&lt;!&ndash;配置mybatis全局配置文件&ndash;&gt;-->
-        <!--<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>-->
-    <!--</bean>-->
-    <!-- 配置sessionFactory mysql语句的配置(语句写在配置文件里的配法)-->
+
+    <!--2/配置sessionFactory mysql语句的配置(语句写在配置文件里的配法)-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据库连接池-->
         <property name="dataSource" ref="dataSource"/>
+        <!--配置mybatis全局配置文件-->
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
     </bean>
+
     <!--3、配置扫描 mapper -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--注入sqlSessionFactor-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-
         <!--扫描mapper-->
         <property name="basePackage" value="com.answer.mapper"/>
-
-
     </bean>
 
 </beans>
